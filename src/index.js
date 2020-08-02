@@ -5,16 +5,23 @@ import "./app/layout/styles.css";
 import App from "./app/layout/App";
 import * as serviceWorker from "./serviceWorker";
 import { BrowserRouter } from "react-router-dom";
+import { Provider } from "react-redux";
+import { configureStore } from "./app/store/configureStore";
+import ScrollToTop from "./app/layout/ScrollToTop";
 
 const rootElement = document.getElementById("root");
+const store = configureStore();
 
 function render() {
   ReactDOM.render(
-    //<React.StrictMode>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>,
-    //</React.StrictMode>
+    <Provider store={store}>
+      <BrowserRouter>
+        <ScrollToTop>
+          <App />
+        </ScrollToTop>
+      </BrowserRouter>
+    </Provider>,
+
     rootElement
   );
 }
